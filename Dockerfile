@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.1.19-stretch
 RUN apt-get update && apt-get install -y zlib1g-dev libicu-dev g++ && apt-get install -y git zip && docker-php-ext-install zip
 RUN apt-get install -y libpng-dev
 RUN echo "memory_limit=-1" > "$PHP_INI_DIR/conf.d/memory-limit.ini" \
@@ -22,10 +22,4 @@ RUN curl -s -f -L -o /tmp/installer.php https://raw.githubusercontent.com/compos
  && composer --ansi --version --no-interaction \
  && rm -rf /tmp/* /tmp/.htaccess
 
-# PHP INI CONFIGURATIONS
-# COPY config/php.ini /usr/local/etc/php
-COPY 000-default.conf /etc/apache2/sites-available
-COPY default-ssl.conf /etc/apache2/sites-available
-
-#CMD bash -c "composer install && /usr/sbin/apache2ctl -D FOREGROUND"
-CMD bash -c "composer install && php bin/console server:run 0.0.0.0:80"
+ CMD "composer"
