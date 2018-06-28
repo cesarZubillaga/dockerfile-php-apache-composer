@@ -2,8 +2,7 @@ FROM php:7.1.19-stretch
 RUN apt-get update && apt-get install -y zlib1g-dev libicu-dev g++ && apt-get install -y git zip && docker-php-ext-install zip
 RUN apt-get install -y libpng-dev
 RUN echo "memory_limit=-1" > "$PHP_INI_DIR/conf.d/memory-limit.ini" \
- && echo "date.timezone 'UTC'" > "$PHP_INI_DIR/conf.d/date_timezone.ini"  \
- && a2enmod rewrite
+ && echo "date.timezone 'UTC'" > "$PHP_INI_DIR/conf.d/date_timezone.ini" 
 RUN docker-php-ext-install gd
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /tmp
